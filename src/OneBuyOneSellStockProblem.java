@@ -3,8 +3,8 @@
  */
 public class OneBuyOneSellStockProblem {
 	
-	static int dp(int[] stocks) {
-		int n = stocks.length;
+	static int dp(int[] prices) {
+		int n = prices.length;
 		if (n == 0) { return 0; } 
 		
 		int[] profits = new int[n];
@@ -15,7 +15,7 @@ public class OneBuyOneSellStockProblem {
 				profits[i] = 0;
 			}
 			else {
-				int profit = stocks[i] - stocks[i - 1];
+				int profit = prices[i] - prices[i - 1];
 				profits[i] = Math.max(profits[i - 1] + profit, profit);
 				maxProfit = Math.max(maxProfit, profits[i]);
 			}
@@ -24,8 +24,8 @@ public class OneBuyOneSellStockProblem {
 		return maxProfit;
 	}
 	
-	static int twoPointers(int[] stocks) {
-		int n = stocks.length;
+	static int twoPointers(int[] prices) {
+		int n = prices.length;
 		if (n == 0) { return 0; }
 		
 		int buyPrice = 0;
@@ -34,14 +34,14 @@ public class OneBuyOneSellStockProblem {
 		
 		for (int i = 0; i < n; i++) {
 			if (i == 0) {
-				buyPrice = stocks[i];
-				sellPrice = stocks[i];
+				buyPrice = prices[i];
+				sellPrice = prices[i];
 			}
 			else {
-				if (stocks[i] < buyPrice) {
-					buyPrice = stocks[i];
+				if (prices[i] < buyPrice) {
+					buyPrice = prices[i];
 				}
-				sellPrice = stocks[i];
+				sellPrice = prices[i];
 				
 				maxProfit = Math.max(maxProfit, sellPrice - buyPrice);
 			}
